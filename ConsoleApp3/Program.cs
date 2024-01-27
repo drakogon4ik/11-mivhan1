@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,6 +63,73 @@ namespace ConsoleApp3
                     return false;
             }
             return true;
+        }
+    }
+    class Test
+    {
+        private int sugar;
+        private int pulse;
+        private int saturation;
+        public Test(int sugar, int pulse, int saturation)
+        {
+            this.sugar = sugar;
+            this.pulse = pulse;
+            this.saturation = saturation;
+        }
+        public int GetSugar()
+        {
+            return sugar;
+        }
+        public int GetPulse()
+        {
+            return pulse;
+        }
+        public int GetSaturation()
+        {
+            return saturation;
+        }
+        public void SetSugar(int sugar)
+        {
+            this.sugar = sugar;
+        }
+        public void SetPulse(int pulse)
+        {
+            this.pulse = pulse;
+        }
+        public void SetSaturation(int saturation)
+        {
+            this.saturation = saturation;
+        }
+    }
+    class Patient
+    {
+        private Test[] tests;
+        private string name;
+        public Patient(string name)
+        {
+            this.name = name;
+            tests = new Test[24];
+        }
+        public bool HadLifeThreatening()
+        {
+            for(int i = 0; i < tests.Length; i++)
+            {
+                if ((tests[i].GetSugar() == 0) && (tests[i].GetPulse() == 0) && (tests[i].GetSaturation() == 0))
+                    break;
+                if ((tests[i].GetSugar() < 50) || (tests[i].GetPulse() < 40) || (tests[i].GetPulse() > 120) || (tests[i].GetSaturation() < 93))
+                    return true;
+            }
+            return false;
+        }
+        public int GetNumOfUnfunctional()
+        {
+            int n = 0;
+            for (int i = 0; i < tests.Length; i++)
+            {
+                if ((tests[i].GetSugar() == 0) && (tests[i].GetPulse() == 0) && (tests[i].GetSaturation() == 0))
+                    n++;
+            }
+            return n;
         }
     }
 }
