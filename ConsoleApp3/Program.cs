@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp3
+namespace Mivhan12
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int[,] arr = { { 2, 3, 1 }, { 1,2,3}, { 3, 1, 2} };
-            for(int i = 0;  i < arr.GetLength(0); i++)
+            int[,] arr = { { 2, 3, 1 }, { 1, 2, 3 }, { 3, 1, 2 } };
+            for (int i = 0; i < arr.GetLength(0); i++)
             {
-                for(int j = 0; j < arr.GetLength(1); j++)
-                    Console.WriteLine(arr[i,j]);
+                for (int j = 0; j < arr.GetLength(1); j++)
+                    Console.WriteLine(arr[i, j]);
             }
             Console.WriteLine(targil3(arr));
         }
@@ -43,7 +43,7 @@ namespace ConsoleApp3
             {
                 arr2[j] = 0;
             }
-            for (int k=0; k< arr1.Length; k++)
+            for (int k = 0; k < arr1.Length; k++)
             {
                 arr1[k] = arr[0, k];
 
@@ -63,6 +63,23 @@ namespace ConsoleApp3
                     return false;
             }
             return true;
+        }
+
+
+        static public int GetExtraSalary(int firstyear, int lastyear, Employee[] employeers)
+        {
+            int money = 0;
+            for(int i = 0; i< employeers.Length;i++)
+            {
+                for (int j = firstyear; j < lastyear; j++)
+                {
+                    if (employeers[i].GetNumOfHours(j) == 100)
+                    {
+                        money += 100;
+                    }
+                }
+            }
+            return money;
         }
     }
     class Test
@@ -112,7 +129,7 @@ namespace ConsoleApp3
         }
         public bool HadLifeThreatening()
         {
-            for(int i = 0; i < tests.Length; i++)
+            for (int i = 0; i < tests.Length; i++)
             {
                 if ((tests[i].GetSugar() == 0) && (tests[i].GetPulse() == 0) && (tests[i].GetSaturation() == 0))
                     break;
@@ -130,6 +147,72 @@ namespace ConsoleApp3
                     n++;
             }
             return n;
+        }
+    }
+    class Course
+    {
+        private int hours;
+        private int year;
+        private bool pass;
+        public Course()
+        {
+            this.hours = 0;
+            this.year = 0;
+            this.pass = false;
+        }
+        public Course(int hours, int year, bool pass)
+        {
+            this.hours = hours;
+            this.year = year;
+            this.pass = pass;
+        }
+        public void SetHours(int hours)
+        {
+            this.hours = hours;
+        }
+        public void SetYear(int year)
+        {
+            this.year = year;
+        }
+        public void SetPass(bool pass)
+        {
+            this.pass = pass;
+        }
+        public int GetHours()
+        {
+            return hours;
+        }
+        public int GetYear()
+        {
+            return year;
+        }
+        public bool GetPass()
+        {
+            return pass;
+        }
+    }
+    class Employee
+    {
+        private Course[] courses;
+        private int employeeNum;
+        public Employee(int employeeNum)
+        {
+            this.employeeNum = employeeNum;
+            Course[] courses = new Course[1000];
+        }
+        public int GetNumOfHours(int year)
+        {
+            int sum = 0;
+            for(int i = 0; i < courses.Length; i++)
+            {
+                if ((courses[i].GetYear() == year) && (courses[i].GetPass()))
+                {
+                    sum += courses[i].GetHours();
+                }
+                if (sum >= 100)
+                    return 100;
+            }
+            return sum;
         }
     }
 }
