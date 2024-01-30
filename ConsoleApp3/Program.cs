@@ -82,6 +82,77 @@ namespace Mivhan12
             return money;
         }
     }
+    class ArrayNode
+    {
+        private int value;
+        private int next;
+        public ArrayNode(int value)
+        {
+            this.value = value;
+            next = -2;
+        }
+
+        public void SetValue(int value)
+        {
+            this.value = value;
+        }
+
+        public void SetNext(int next)
+        {
+            this.next = next;
+        }
+
+        public int GetValue()
+        {
+            return value;
+        }
+
+        public int GetNext()
+        {
+            return next;
+        }
+    }
+    class ArrayList
+    {
+        private ArrayNode[] array; //מערך של הערכים
+        private int start; //המספר הסידורי של התא הראשון
+                           //פעולה בונה
+        public ArrayList()
+        {
+            this.array = new ArrayNode[10];
+            for (int i = 0; i < this.array.Length; i++)
+{
+                this.array[i] = new ArrayNode(0);
+            }
+            start = -1;
+        }
+
+        public void Insert(int index)
+        {
+            for(int i = 0;i < this.array.Length;i++)
+            {
+                if (array[i].GetNext() == -2)
+                {
+                    array[i].SetValue(index);
+                    array[i].SetNext(start);
+                    start = i;
+                    break;
+                }
+            }
+        }
+
+        public int Value(int index)
+        {
+            for (int i = 0; i < this.array.Length; i++)
+            {
+                if (i == index)
+                {
+                    return array[i].GetValue();
+                }
+            }
+            return -1;
+        }
+    }
     class Test
     {
         private int sugar;
